@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>20250908debug | LST's blog</title><meta name="author" content="LST"><meta name="copyright" content="LST"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="今天用黑马点评加rocketmq，想测试一下模拟大量用户下单 项目代码见CuSO41108&#x2F;hmdp_init 遇到了经典的分布式事务数据不一致的问题： 我用ai写的测试用例，因为上次生成5000个token用jmeter压测失败了（暂未解决） 第一次测试：redis中stock为1000，数据库也为1000，THREAD_COUNT &#x3D; 5000。 结果： 数据库最后剩下9，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20250908debug">
+<meta property="og:url" content="https://cuso41108.github.io/2025/09/08/20250908debug/index.html">
+<meta property="og:site_name" content="LST&#39;s blog">
+<meta property="og:description" content="今天用黑马点评加rocketmq，想测试一下模拟大量用户下单 项目代码见CuSO41108&#x2F;hmdp_init 遇到了经典的分布式事务数据不一致的问题： 我用ai写的测试用例，因为上次生成5000个token用jmeter压测失败了（暂未解决） 第一次测试：redis中stock为1000，数据库也为1000，THREAD_COUNT &#x3D; 5000。 结果： 数据库最后剩下9，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cuso41108.github.io/img/luffy.png">
+<meta property="article:published_time" content="2025-09-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-08T15:41:00.868Z">
+<meta property="article:author" content="LST">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cuso41108.github.io/img/luffy.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "20250908debug",
+  "url": "https://cuso41108.github.io/2025/09/08/20250908debug/",
+  "image": "https://cuso41108.github.io/img/luffy.png",
+  "datePublished": "2025-09-07T16:00:00.000Z",
+  "dateModified": "2025-09-08T15:41:00.868Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "LST",
+      "url": "https://cuso41108.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://cuso41108.github.io/2025/09/08/20250908debug/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '20250908debug',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/luffy.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/%E9%9F%B3%E4%B9%90/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/%E7%94%B5%E5%BD%B1/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/space.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/luffy.png" alt="Logo"><span class="site-name">LST's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">20250908debug</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/%E9%9F%B3%E4%B9%90/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/%E7%94%B5%E5%BD%B1/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">20250908debug</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-09-07T16:00:00.000Z" title="Created 2025-09-08 00:00:00">2025-09-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-09-08T15:41:00.868Z" title="Updated 2025-09-08 23:41:00">2025-09-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>今天用黑马点评加rocketmq，想测试一下模拟大量用户下单</p>
+<p>项目代码见<a target="_blank" rel="noopener" href="https://github.com/CuSO41108/hmdp_init">CuSO41108&#x2F;hmdp_init</a></p>
+<p><strong>遇到了经典的分布式事务数据不一致的问题：</strong></p>
+<p>我用ai写的测试用例，因为上次生成5000个token用jmeter压测失败了（暂未解决）</p>
+<p>第一次测试：redis中stock为1000，数据库也为1000，THREAD_COUNT &#x3D; 5000。</p>
+<p>结果： 数据库最后剩下9，redis:stock剩下0 （这个时候忘记看voucher_order和seckill_voucher了）</p>
+<p> 起初是问了ai：</p>
+<p>MQ<strong>重复消费</strong> 的可能性存在。必须保证handleVoucherOrder 和 createVoucherOrder 是 <strong>幂等的</strong><br> 已经有幂等校验：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Long</span> <span class="variable">count</span> <span class="operator">=</span> query().eq(<span class="string">&quot;user_id&quot;</span>, userId).eq(<span class="string">&quot;voucher_id&quot;</span>, voucherOrder.getVoucherId()).count();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">  log.error(<span class="string">&quot;用户已经下过单了&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;&#x2F; 在 handleVoucherOrder 中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">isLock</span> <span class="operator">=</span> lock.tryLock();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!isLock)&#123;</span><br><span class="line"></span><br><span class="line">  log.error(<span class="string">&quot;不允许重复下单&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span>; <span class="comment">// &lt;-- 致命 BUG #1</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 createVoucherOrder 中：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">  log.error(<span class="string">&quot;用户已经下过单了&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span>; <span class="comment">// &lt;-- 致命 BUG #2</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!success) &#123;</span><br><span class="line"></span><br><span class="line">  log.error(<span class="string">&quot;库存不足!&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span>; <span class="comment">// &lt;-- 致命 BUG #3</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于 <code>onMessage</code> 方法的 <code>try</code> 块来说，这个调用<strong>没有抛出任何异常</strong>，它“成功”执行完了。</p>
+<p><code>catch</code> 块没有捕获到任何东西。</p>
+<p><code>onMessage</code> 方法正常结束。</p>
+<p>RocketMQ 收到一个“成功”的 ACK，于是<strong>心满意足地将这条消息标记为“已消费”并删除</strong>。</p>
+<p>往以下2个方面修了一下：</p>
+<ol>
+<li><p>修复静默失败（启用 RocketMQ 重试机制）</p>
+</li>
+<li><p>配置死信队列 + 补偿 Redis</p>
+</li>
+</ol>
+<p>之后，进行第二次测试：</p>
+<p> 测试结果如下，数据库方面，voucher_order新增1073条，seckill_voucher库存从1000-&gt;19，redis方</p>
+<p>面：seckill:stock:10从1000—&gt;0，seckill:order:10新增1000.</p>
+<p>92 个订单 &#x3D; 1073 (总数) - 981 (正常订单)。这意味着有 92 次重复消费（Bug #1）导致了订单创建。这 92 次重复消费，由于事务隔离性的巧合，它们执行时 count()&#x3D;0 通过了，但 update stock 失败了（因为库存早就是 0 了），但 save(order) 却<strong>成功</strong>了。</p>
+<p> 原因：</p>
+<p>@Transactional 没能回滚 save(order)  ！</p>
+<p>于是加了：</p>
+<p>ALTER TABLE tb_voucher_order<br> ADD UNIQUE KEY <code>UK_USER_VOUCHER</code> (<code>user_id</code>, <code>voucher_id</code>);    &#x2F;&#x2F;了解到联合唯一索引</p>
+<p><strong>加上这个索引后的效果：</strong></p>
+<p>当 RocketMQ 重试消息时，即使你的 count() 检查因为事务隔离级别而失效（读到了旧快照），当 save(order) 尝试插入一个重复的（user_id, voucher_id）组合时，数据库会<strong>立即抛出</strong> <strong>DuplicateKeyException</strong>。这个异常会<strong>导致整个事务（包括</strong> <strong>update stock****）回滚</strong>，然后这个异常会被 RocketMQ 捕获，消息会继续重试，直到最后进入死信队列 (DLQ)。</p>
+<p>加了联合唯一索引后，解决了！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://cuso41108.github.io">LST</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://cuso41108.github.io/2025/09/08/20250908debug/">https://cuso41108.github.io/2025/09/08/20250908debug/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/luffy.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/03/31/%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9%E5%B7%A5%E5%85%B7/" title="待办事项工具"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">待办事项工具</div></div><div class="info-2"><div class="info-item-1">     .quadrant-container {     display: grid;     grid-template-columns: 1fr 1fr;     grid-template-rows: 1fr 1fr;     gap: 10px;     margin: 20px 0;   }   .quadrant {     border: 2px solid #333;     padding: 15px;     min-height: 200px;     border-radius: 10px;     color: white;   }   #q1 { background-color: #ff4d4d; }   #q2 { background-color: orange; }   #q3 { background-color: #4da6ff; }   #q4 { background-color: #66cc66; }    body {   /* Butterfly 主题的 body 可能被包裹，改用局部背景 */   background:...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/luffy.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">LST</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/CuSO41108/"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/CuSO41108/" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1737268347@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/08/20250908debug/" title="20250908debug">20250908debug</a><time datetime="2025-09-07T16:00:00.000Z" title="Created 2025-09-08 00:00:00">2025-09-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/31/%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9%E5%B7%A5%E5%85%B7/" title="待办事项工具">待办事项工具</a><time datetime="2025-03-30T16:00:00.000Z" title="Created 2025-03-31 00:00:00">2025-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/09/hello-world/" title="Hello World">Hello World</a><time datetime="2025-03-09T14:44:31.477Z" title="Created 2025-03-09 22:44:31">2025-03-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/09/test/" title="测试文章">测试文章</a><time datetime="2025-03-08T16:00:00.000Z" title="Created 2025-03-09 00:00:00">2025-03-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/09/CS61Bnote/" title="CS61Bnote">CS61Bnote</a><time datetime="2025-03-08T16:00:00.000Z" title="Created 2025-03-09 00:00:00">2025-03-09</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/space.png);"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By LST</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
