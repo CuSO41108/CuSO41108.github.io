@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LST's blog | LST's blog</title><meta name="author" content="LST"><meta name="copyright" content="LST"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Q： 当前实现会对业务异常（如库存不足）抛出RuntimeException，导致消息重复投递。 1234567891011121314151617181920212223createVoucherOrder  中boolean success &#x3D; seckillVoucherService.update()    .setSql(&quot;stock &#x3D; stock - 1&quot;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LST&#39;s blog">
+<meta property="og:url" content="https://cuso41108.github.io/2025/09/10/hmdp-Q-A/index.html">
+<meta property="og:site_name" content="LST&#39;s blog">
+<meta property="og:description" content="Q： 当前实现会对业务异常（如库存不足）抛出RuntimeException，导致消息重复投递。 1234567891011121314151617181920212223createVoucherOrder  中boolean success &#x3D; seckillVoucherService.update()    .setSql(&quot;stock &#x3D; stock - 1&quot;)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cuso41108.github.io/img/luffy.png">
+<meta property="article:published_time" content="2025-09-10T13:41:42.714Z">
+<meta property="article:modified_time" content="2025-09-11T16:29:48.381Z">
+<meta property="article:author" content="LST">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cuso41108.github.io/img/luffy.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "url": "https://cuso41108.github.io/2025/09/10/hmdp-Q-A/",
+  "image": "https://cuso41108.github.io/img/luffy.png",
+  "datePublished": "2025-09-10T13:41:42.714Z",
+  "dateModified": "2025-09-11T16:29:48.381Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "LST",
+      "url": "https://cuso41108.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://cuso41108.github.io/2025/09/10/hmdp-Q-A/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LST\'s blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/luffy.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/%E9%9F%B3%E4%B9%90/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/%E7%94%B5%E5%BD%B1/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/space.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/luffy.png" alt="Logo"><span class="site-name">LST's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">LST's blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/%E9%9F%B3%E4%B9%90/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/%E7%94%B5%E5%BD%B1/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Untitled</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-09-10T13:41:42.714Z" title="Created 2025-09-10 21:41:42">2025-09-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-09-11T16:29:48.381Z" title="Updated 2025-09-12 00:29:48">2025-09-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>Q： 当前实现会对业务异常（如库存不足）抛出RuntimeException，导致消息重复投递。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">createVoucherOrder  中</span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="variable">success</span> <span class="operator">=</span> seckillVoucherService.update()</span><br><span class="line"></span><br><span class="line">    .setSql(<span class="string">&quot;stock = stock - 1&quot;</span>)</span><br><span class="line"></span><br><span class="line">    .eq(<span class="string">&quot;voucher_id&quot;</span>, voucherOrder.getVoucherId()).gt(<span class="string">&quot;stock&quot;</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    .update();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!success) &#123;</span><br><span class="line"></span><br><span class="line">  *log*.error(<span class="string">&quot;库存不足!&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//return;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;数据库库存不足&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建订单</span></span><br><span class="line"></span><br><span class="line">save(voucherOrder);</span><br></pre></td></tr></table></figure>
+
+<p>A：</p>
+<ul>
+<li>不可恢复错误（如重复订单）：记录日志并正常返回<br>可恢复错误（如数据库超时）：抛出异常触发重试</li>
+</ul>
+<p>Q：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleVoucherOrder</span><span class="params">(VoucherOrder voucherOrder)</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//1.获取用户</span></span><br><span class="line"></span><br><span class="line">  <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> voucherOrder.getUserId();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//创建锁对象</span></span><br><span class="line"></span><br><span class="line">  <span class="type">RLock</span> <span class="variable">lock</span> <span class="operator">=</span> redissonClient.getLock(<span class="string">&quot;lock:order:&quot;</span> + userId);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//获取锁</span></span><br><span class="line"></span><br><span class="line">  <span class="type">boolean</span> <span class="variable">isLock</span> <span class="operator">=</span> lock.tryLock();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(!isLock)&#123;</span><br><span class="line"></span><br><span class="line">    *log*.error(<span class="string">&quot;不允许重复下单&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//return;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;获取锁失败，不允许重复下单&quot;</span>);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取代理对象</span></span><br><span class="line"></span><br><span class="line">    <span class="type">IVoucherOrderService</span> <span class="variable">proxy</span> <span class="operator">=</span> (IVoucherOrderService) AopContext.*currentProxy*();</span><br><span class="line"></span><br><span class="line">    proxy.createVoucherOrder(voucherOrder);</span><br><span class="line"></span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">    lock.unlock();</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>handleVoucherOrder中的</p>
+<p>redisson锁与redis+lua重复了吗？有必要删除吗？</p>
+<p>A：有，否则相当于做了三重校验：Redis Lua → Redisson 锁 → 数据库唯一性，性能会打折</p>
+<p>Q：幂等性保障</p>
+<ul>
+<li><p>目前在 createVoucherOrder 里只是查 count 判断是否下过单。</p>
+</li>
+<li><p>更推荐在 <strong>数据库表层面</strong>加唯一索引：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE voucher_order ADD UNIQUE KEY uk_user_voucher (user_id,     voucher_id);</span><br></pre></td></tr></table></figure>
+
+<p> 这样即使 RocketMQ 消息重复投递也能防止重复下单。</p>
+</li>
+</ul>
+<p>Q：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">success</span> <span class="operator">=</span> seckillVoucherService.update()</span><br><span class="line"></span><br><span class="line">    .setSql(<span class="string">&quot;stock = stock - 1&quot;</span>)</span><br><span class="line"></span><br><span class="line">    .eq(<span class="string">&quot;voucher_id&quot;</span>, voucherOrder.getVoucherId()).gt(<span class="string">&quot;stock&quot;</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    .update();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!success) &#123;</span><br><span class="line"></span><br><span class="line">  log.error(<span class="string">&quot;库存不足!&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//return;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;数据库库存不足&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段以后并发高了怎么解决？</p>
+<p>Q： </p>
+<ul>
+<li><p>RocketMQ 在极端情况下可能会“重复投递”，所以消费端必须幂等。</p>
+<p>已经在 DB 里有     query().eq(“user_id”, userId).eq(“voucher_id”, …) 判断，但更好的办法是 </p>
+<p>建唯一索引，直接用 DB 保证幂等。</p>
+</li>
+</ul>
+<p>Q:</p>
+<ul>
+<li><p>现在 throw new RuntimeException，RocketMQ 会重试。</p>
+<p>但要注意：如果是逻辑性错误（比如用户已下过单），重试是没意义的，会死循环。</p>
+<p>建议只对<strong>系统性异常</strong>（DB 连接超时、Redis 挂了）抛异常，让 MQ 重试；如果是业务性错误，直</p>
+<p>接 log.warn 并吞掉</p>
+</li>
+</ul>
+<p>Q.RocketMQ监听器抛出异常.消息被送回消费者，消费者再次尝试处理。由于相同原因（库存仍为0）失败，抛出异常，再次被重新安排。这就形成了一个无限循环</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(VoucherOrder voucherOrder)</span> &#123;</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">&quot;接收到秒杀订单信息:&#123;&#125;&quot;</span>, voucherOrder);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ((VoucherOrderServiceImpl) voucherOrderService).handleVoucherOrder(voucherOrder);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            log.error(<span class="string">&quot;处理秒杀订单失败！订单详情: &#123;&#125;&quot;</span>, voucherOrder, e);</span><br><span class="line">            <span class="comment">// 抛出异常，触发 RocketMQ 的自动重试机制</span></span><br><span class="line"><span class="comment">//删掉这句            throw new RuntimeException(&quot;消费失败，触发重试&quot;, e);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://cuso41108.github.io">LST</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://cuso41108.github.io/2025/09/10/hmdp-Q-A/">https://cuso41108.github.io/2025/09/10/hmdp-Q-A/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/luffy.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/09/08/20250908debug/" title="20250908debug"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">20250908debug</div></div><div class="info-2"><div class="info-item-1">今天用黑马点评加rocketmq，想测试一下模拟大量用户下单 项目代码见CuSO41108&#x2F;hmdp_init 遇到了经典的分布式事务数据不一致的问题： 我用ai写的测试用例，因为上次生成5000个token用jmeter压测失败了（暂未解决） 第一次测试：redis中stock为1000，数据库也为1000，THREAD_COUNT &#x3D; 5000。 结果： 数据库最后剩下9，redis:stock剩下0 （这个时候忘记看voucher_order和seckill_voucher了）  起初是问了ai： MQ重复消费 的可能性存在。必须保证handleVoucherOrder 和 createVoucherOrder 是 幂等的 已经有幂等校验： 123456789Long count = query().eq(&quot;user_id&quot;, userId).eq(&quot;voucher_id&quot;, voucherOrder.getVoucherId()).count();if (count &gt; 0) &#123; ...</div></div></div></a><a class="pagination-related" href="/2025/09/21/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/" title="限流算法笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">限流算法笔记</div></div><div class="info-2"><div class="info-item-1">我们为什么需要限流？  防止恶意攻击、保障系统稳定、应对秒杀等高并发场景      有哪些常见的限流算法？ 固定窗口，滑动窗口，漏桶，令牌桶    固定窗口，缺点：比如  限流阀值为5个请求，单位时间窗口是1s，如果我们在单位时间内的前0.8-1s和1-1.2s，分别并发5个请求。虽然都没有超过阀值，但是如果算0.8-1.2s内的，则并发数高达10，已经超过单位时间1s不超过5阀值的定义了。   当滑动窗口的格子周期划分的越多，那么滑动窗口的滚动就越平滑，限流的统计就会越精确。  1234567891011121314151617181920212223242526272829303132-- 滑动窗口限流脚本（Redis 7 兼容：所有新变量均使用 local，避免写全局表导致 readonly 错误）local key = KEYS[1]local window = tonumber(ARGV[1]) -- 秒local limit = tonumber(ARGV[2])local now = tonumber(ARGV[3]) -- 毫秒if not window or...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/luffy.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">LST</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/CuSO41108/"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/CuSO41108/" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1737268347@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/21/%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/" title="限流算法笔记">限流算法笔记</a><time datetime="2025-09-20T16:00:00.000Z" title="Created 2025-09-21 00:00:00">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/10/hmdp-Q-A/" title="Untitled">Untitled</a><time datetime="2025-09-10T13:41:42.714Z" title="Created 2025-09-10 21:41:42">2025-09-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/08/20250908debug/" title="20250908debug">20250908debug</a><time datetime="2025-09-07T16:00:00.000Z" title="Created 2025-09-08 00:00:00">2025-09-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/31/%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9%E5%B7%A5%E5%85%B7/" title="待办事项工具">待办事项工具</a><time datetime="2025-03-30T16:00:00.000Z" title="Created 2025-03-31 00:00:00">2025-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/09/hello-world/" title="Hello World">Hello World</a><time datetime="2025-03-09T14:44:31.477Z" title="Created 2025-03-09 22:44:31">2025-03-09</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/space.png);"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By LST</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
